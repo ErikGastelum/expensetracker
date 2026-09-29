@@ -102,7 +102,7 @@ lab05/
 | Member | Responsibilities |
 |---|---|
 | Erik Gastelum | Data model and file save/load |
-| <!-- Name --> | Add / edit / delete logic |
+| Jacob Micu | Add / edit / delete logic |
 | Maika Pangilinan | Menu, user interface, input validation |
 | Jonathan Torres | Summaries |
 | Everyone | Testing, documentation, release |
