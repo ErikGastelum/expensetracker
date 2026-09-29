@@ -30,8 +30,6 @@ A command-line expense tracker that lets you log spending, organize it by catego
 
 ## Requirements
 
-- <!-- Language and version, e.g., Python 3.10+ / Java 17 / g++ with C++17 -->
-- <!-- Any libraries, or "No external dependencies" -->
 - Tested on Odin (Linux)
 
 ## Installation
@@ -103,7 +101,7 @@ lab05/
 
 | Member | Responsibilities |
 |---|---|
-| <!-- Name --> | Data model and file save/load |
+| Erik Gastelum | Data model and file save/load |
 | <!-- Name --> | Add / edit / delete logic |
 | <!-- Name --> | Menu, user interface, input validation |
 | <!-- Name --> | Summaries |
