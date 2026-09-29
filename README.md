@@ -103,7 +103,7 @@ lab05/
 |---|---|
 | Erik Gastelum | Data model and file save/load |
 | <!-- Name --> | Add / edit / delete logic |
-| <!-- Name --> | Menu, user interface, input validation |
+| <!-- Maika Pangilinan--> | Menu, user interface, input validation |
 | <!-- Name --> | Summaries |
 | Everyone | Testing, documentation, release |
 
