@@ -104,7 +104,7 @@ lab05/
 | Erik Gastelum | Data model and file save/load |
 | <!-- Name --> | Add / edit / delete logic |
 | Maika Pangilinan | Menu, user interface, input validation |
-| <!-- Name --> | Summaries |
+| Jonathan Torres | Summaries |
 | Everyone | Testing, documentation, release |
 
 Task planning and progress are tracked on our [GitHub Project board](<!-- link to your project board -->).
