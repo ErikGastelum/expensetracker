@@ -3,7 +3,25 @@
 
 """
 
-from validation import get_menu_choice
+from validation import ( 
+    get_menu_choice,
+    get_amount,
+    get_category,
+    get_date,
+    get_description,
+)
+
+try:
+    from expense_logic import add_expense
+except ImportError:
+    print("[temp] expense_logic.py not found - using stand-in for add_expense")
+    from expense import Expense  # Erik's data model
+
+    def add_expense(expenses, amount, category, date, description):
+        new_id = max([e.id for e in expenses], default=0) + 1
+        expenses.append(Expense(new_id, amount, category, date, description))
+
+
 
 MENU_TEXT = """
 === Expense Tracker ===
@@ -17,18 +35,36 @@ MENU_TEXT = """
 
 VALID_CHOICES = ["1", "2", "3", "4", "5", "6", "7"]
 
+def handle_add(expenses):
+    """Collect validated input and add a new expense."""
+    amount = get_amount()
+    category = get_category()
+    date = get_date()
+    description = get_description()
+    try:
+        add_expense(expenses, amount, category, date, description)
+    except ValueError as error:  # Erik's Expense class double-checks the data
+        print(f"Invalid input: {error}")
+        return
+    print(f"Expense added! You now have {len(expenses)} expense(s).")
+
 
 def main():
+    expenses = []
+
     while True:  # repeats until the user chooses Quit
         print(MENU_TEXT)
         choice = get_menu_choice(VALID_CHOICES)
 
-        if choice == "7":
+        if choice == "1":
+            handle_add(expenses)
+        elif choice == "7":
             print("Goodbye!")
             break
+        else:
 
         # Placeholder: each option gets wired up in a later commit.
-        print("(not implemented yet)")
+            print("(not implemented yet)")
 
 
 if __name__ == "__main__":
