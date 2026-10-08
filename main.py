@@ -12,14 +12,24 @@ from validation import (
 )
 
 try:
-    from expense_logic import add_expense
+    from expense_logic import add_expense, view_expenses
 except ImportError:
-    print("[temp] expense_logic.py not found - using stand-in for add_expense")
+    print("[temp] expense_logic.py not found - using stand-ins")
     from expense import Expense  # Erik's data model
 
     def add_expense(expenses, amount, category, date, description):
         new_id = max([e.id for e in expenses], default=0) + 1
         expenses.append(Expense(new_id, amount, category, date, description))
+
+    def view_expenses(expenses):
+        if not expenses:
+            print("No expenses yet.")
+            return
+        print(f"\n{'ID':>3}  {'Date':<10}  {'Category':<10}  {'Amount':>10}  Description")
+        for e in expenses:
+            print(f"{e.id:>3}  {e.date:<10}  {e.category:<10}  "
+                  f"${e.amount:>9.2f}  {e.description}")
+
 
 
 
@@ -58,11 +68,12 @@ def main():
 
         if choice == "1":
             handle_add(expenses)
+        elif choice == "2":
+            view_expenses(expenses)
         elif choice == "7":
             print("Goodbye!")
             break
         else:
-
         # Placeholder: each option gets wired up in a later commit.
             print("(not implemented yet)")
 
