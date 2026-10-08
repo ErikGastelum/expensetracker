@@ -11,23 +11,20 @@ def load_expenses(file_path=DEFAULT_FILE):
     if not os.path.exists(file_path):
         return expenses
 
-    with open(file_path, mode="r", newline="") as file:
+    with open(file_path, mode="r", newline="", encoding="utf-8") as file:
         reader = csv.reader(file)
-        next(reader)  # Skip header
-        for row in reader:
-            if len(row) == 5:
-                expense = Expense(
-                    id=int(row[0]),
-                    amount=float(row[1]),
-                    category=row[2],
-                    date=row[3],
-                    description=row[4]
-                )
-                expenses.append(expense)
+        next(reader, None)  # Skip header
+        for line_number, row in enumerate(reader, start=2):
+            if not row:
+                continue  # Skip empty rows
+            try:
+                expenses.append(Expense.from_row(row))
+            except ValueError as error:
+                print(f"Warning: skipped bad row on line {line_number}: {error}")
     return expenses
 
 def save_expenses(expenses, file_path=DEFAULT_FILE):
-    with open(file_path, mode="w", newline="") as file:
+    with open(file_path, mode="w", newline="", encoding="utf-8") as file:
         writer = csv.writer(file)
         writer.writerow(HEADER)  # Write header
         for expense in expenses:
