@@ -11,6 +11,8 @@ from validation import (
     get_description,
     get_expense_id,
 )
+from summary import print_category_summary, print_monthly_summary  # Jonathan's code
+
 
 try:
     from expense_logic import add_expense, view_expenses, edit_expense, delete_expense
@@ -123,12 +125,13 @@ def main():
             handle_edit(expenses)
         elif choice == "4":
             handle_delete(expenses)
+        elif choice == "5":
+            print_category_summary(expenses)
+        elif choice == "6":
+            print_monthly_summary(expenses)
         elif choice == "7":
             print("Goodbye!")
             break
-        else:
-        # Placeholder: each option gets wired up in a later commit.
-            print("(not implemented yet)")
 
 
 if __name__ == "__main__":
