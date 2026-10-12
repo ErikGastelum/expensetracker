@@ -36,7 +36,7 @@ def edit_expense(expenses, expense_id, amount=None, category=None, date=None, de
         return False
     old = expenses[index]
 
-    if amount is NOne:
+    if amount is None:
         amount = old.amount
     if category is None:
         category = old.category
