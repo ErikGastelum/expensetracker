@@ -7,7 +7,7 @@ import sys
 import unittest
 from contextlib import redirect_stdout
 
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.asbpath(__file))))
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from expense_logic import (
     add_expense,
@@ -49,7 +49,7 @@ class TestAdd(unittest.TestCase):
     def test_bad_input_leaves_list_unchanged(self):
         expenses = []
         bad_inputs = [
-            (-5, "food", "2026-01-01")
+            (-5, "food", "2026-01-01"),
             (0, "food", "2026-01-01"),
             ("abc", "food", "2026-01-01"),
             (5, "food", "2026-13-45"),
@@ -82,8 +82,8 @@ class TestEdit(unittest.TestCase):
         self.assertEqual(self.expenses[0].description, "lunch")
 
     def test_edit_does_not_touch_other_expenses(self):
-        edit_expense(self.expenses, 1, amoutn = 99)
-        self.assertEqual(self.expenses[1].amount, 20.0)
+        edit_expense(self.expenses, 1, amount = 99)
+        self.assertEqual(self.expenses[1].amount, 10.0)
         self.assertEqual(len(self.expenses), 2)
 
     def test_edit_accepts_string_id(self):
@@ -94,7 +94,7 @@ class TestEdit(unittest.TestCase):
         edit_expense(self.expenses, 1, description="")
         self.assertEqual(self.expenses[0].description, "")
 
-    def test_missing_id>returns_false(self):
+    def test_missing_id_returns_false(self):
         self.assertFalse(edit_expense(self.expenses, 99, amount=5))
         self.assertEqual(self.expenses[0].amount,10.0)
 
