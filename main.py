@@ -12,7 +12,7 @@ from validation import (
     get_expense_id,
 )
 from summary import print_category_summary, print_monthly_summary  # Jonathan's code
-
+import storage 
 
 try:
     from expense_logic import add_expense, view_expenses, edit_expense, delete_expense
@@ -111,7 +111,7 @@ def handle_delete(expenses):
         print(f"No expense found with ID {expense_id}.")
 
 def main():
-    expenses = []
+    expenses = storage.load_expenses()
 
     while True:  # repeats until the user chooses Quit
         print(MENU_TEXT)
@@ -119,12 +119,15 @@ def main():
 
         if choice == "1":
             handle_add(expenses)
+            storage.save_expenses(expenses)
         elif choice == "2":
             view_expenses(expenses)
         elif choice == "3":
             handle_edit(expenses)
+            storage.save_expenses(expenses)
         elif choice == "4":
             handle_delete(expenses)
+            storage.save_expenses(expenses)
         elif choice == "5":
             print_category_summary(expenses)
         elif choice == "6":

@@ -24,17 +24,14 @@ def load_expenses(file_path=DEFAULT_FILE):
     return expenses
 
 def save_expenses(expenses, file_path=DEFAULT_FILE):
-    with open(file_path, mode="w", newline="", encoding="utf-8") as file:
+    temp_path = file_path + ".tmp"
+    with open(temp_path, mode="w", newline="", encoding="utf-8") as file:
         writer = csv.writer(file)
-        writer.writerow(HEADER)  # Write header
+        writer.writerow(HEADER)
         for expense in expenses:
-            writer.writerow([
-                expense.id,
-                expense.amount,
-                expense.category,
-                expense.date,
-                expense.description
-            ])
+            writer.writerow(expense.to_row())
+    os.replace(temp_path, file_path)
+
 
 def next_id(expenses):
     if not expenses:
